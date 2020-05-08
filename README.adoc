@@ -1,0 +1,28 @@
+== Patches Required to get an OCP - AIO (all in one) cluster running.
+
+The patch commands were mostly all sourced from the below blog.
+
+link:https://www.openshift.com/blog/revamped-openshift-all-in-one-aio-for-labs-and-fun[Revamped OpenShift All-in-One (AIO) for Labs and Fun]
+
+Once the cluster api is up and running. execute the patch script
+
+----
+./aio-patch.sh
+----
+
+==== Steps performed in the patch
+
+- Patch etcd-quorum-guard to unmanaged state
+- Downscale etcd-quorum-guard to one
+- Downscale the number of routers to one
+- Downscale the number of consoles pods
+- Downscale the number of authentication pods
+- Downscale the number of OLM pods
+- Downscale the number monitoring services pods
+- Patch etcd cluster to enable it running in single node non HA mode (New in OCP 4.4.3)
+
+===== Reference links for running etcd cluster in single node non HA mode.
+
+- https://bugzilla.redhat.com/show_bug.cgi?id=1805034
+- https://github.com/openshift/cluster-etcd-operator/pull/279#issue-393886988
+
